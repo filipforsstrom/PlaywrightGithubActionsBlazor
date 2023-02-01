@@ -10,15 +10,19 @@ on:
     branches: ["master"]
 
 jobs:
-  build:
+  playwright:
+    name: "Playwright Tests"
     runs-on: ubuntu-latest
-
+    container:
+      image: mcr.microsoft.com/playwright:v1.30.0-focal
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET
+      - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
-      - name: Run end-to-end tests
+      - run: dotnet build
+      - name: Ensure browsers are installed
+        run: pwsh Blazor.NUnit.Tests/bin/Debug/net7.0/playwright.ps1 install --with-deps
+      - name: Run your tests
         run: dotnet test
-        working-directory: Blazor.NUnit.Tests
