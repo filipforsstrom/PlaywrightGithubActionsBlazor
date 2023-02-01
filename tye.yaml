@@ -1,5 +1,5 @@
 services:
-  - name: BlazorApp
+  - name: Blazor
     project: Blazor/Server/Blazor.Server.csproj
     bindings:
       - port: 5000
