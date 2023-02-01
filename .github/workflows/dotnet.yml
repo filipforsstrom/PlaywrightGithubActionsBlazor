@@ -19,15 +19,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
-      # - name: Restore dependencies
-      #   run: dotnet restore
-      - name: Install dotnet tools
-        run: dotnet tool restore
-        working-directory: Blazor
-      - name: Build
-        run: dotnet tye build Blazor -v Debug
-      - name: Start container
-        run: docker run -d -p 5000:80 blazor-server:1.0.0
       - name: Run end-to-end tests
         run: dotnet test
         working-directory: Blazor.NUnit.Tests
